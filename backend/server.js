@@ -33,7 +33,16 @@ app.get('/api/productos', async (req, res) => {
     res.status(500).json({ error: 'Error al cargar productos' });
   }
 });
-
+// Ruta para obtener todos los tickets (solo para admin)
+app.get('/api/tickets', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM tickets_sat ORDER BY fecha_creacion DESC');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al cargar tickets' });
+  }
+});
 // Ruta para crear un ticket SAT
 app.post('/api/tickets', async (req, res) => {
   const { cliente, telefono, correo, descripcion } = req.body;
@@ -49,7 +58,25 @@ app.post('/api/tickets', async (req, res) => {
     res.status(500).json({ error: 'Error al crear ticket' });
   }
 });
+// Ruta para actualizar el estado de un ticket
+app.put('/api/tickets/:id', async (req, res) => {
+  const { id } = req.params;
+  const { estado } = req.body;
 
+  try {
+    const result = await db.query(
+      'UPDATE tickets_sat SET estado = $1 WHERE id = $2 RETURNING id',
+      [estado, id]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Ticket no encontrado' });
+    }
+    res.json({ message: 'Estado actualizado', id: result.rows[0].id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al actualizar ticket' });
+  }
+});
 // Middleware de 404
 app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
