@@ -29,16 +29,16 @@ const initDb = async () => {
       );
     `);
 
-    // Insertar datos de ejemplo solo si no hay productos
-    const { rows } = await db.query('SELECT COUNT(*) AS count FROM productos');
-    if (rows[0].count === 0) {
-      await db.query(`
-        INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
-        ('CPU Intel i5', 'Procesador Intel i5 12400F', 150.00, 10),
-        ('GPU RTX 3060', 'Tarjeta gráfica RTX 3060 12GB', 300.00, 5),
-        ('RAM 16GB', 'Memoria RAM 16GB DDR4 3200MHz', 60.00, 20);
-      `);
-    }
+    // Eliminar datos existentes (solo para desarrollo)
+    await db.query('DELETE FROM productos;');
+
+    // Insertar datos de ejemplo
+    await db.query(`
+      INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
+      ('CPU Intel i5', 'Procesador Intel i5 12400F', 150.00, 10),
+      ('GPU RTX 3060', 'Tarjeta gráfica RTX 3060 12GB', 300.00, 5),
+      ('RAM 16GB', 'Memoria RAM 16GB DDR4 3200MHz', 60.00, 20);
+    `);
 
     console.log('✅ Base de datos inicializada correctamente.');
   } catch (err) {
