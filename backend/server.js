@@ -8,6 +8,20 @@ const initDb = require('./init-db');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Añadir manualmente encabezados CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://sat-1475.vercel.app'); // O '*' solo para pruebas
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  next();
+});
+
 // Middleware inicial
 app.use(cors({
   origin: [
