@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://sat1475-frontend.vercel.app  ' // <-- Asegúrate de quitar espacios al final si los hay
+    'https://sat1475.vercel.app' // <-- Asegúrate de quitar espacios al final si los hay
   ]
 }));
 
