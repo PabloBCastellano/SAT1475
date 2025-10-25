@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    // Añadiremos la URL de Vercel después del despliegue
+    'https://sat1475-frontend.vercel.app'
   ]
 }));
 
