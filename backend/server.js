@@ -2,11 +2,11 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const db = require('./db'); // Ahora usa pg
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Permitir frontend local y Vercel
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -16,23 +16,42 @@ app.use(cors({
 
 app.use(express.json());
 
-// Ruta de prueba: GET /api/hello
+// Ruta de prueba
 app.get('/api/hello', (req, res) => {
-  res.json({ message: '¡API de SAT1475 funcionando!', timestamp: new Date() });
+  res.json({ message: '¡API de SAT1475 funcionando con PostgreSQL!', timestamp: new Date() });
 });
 
-// Ruta de prueba: POST /api/test
-app.post('/api/test', (req, res) => {
-  res.json({ received: req.body, echo: 'OK' });
+// Ruta para obtener productos desde la base de datos
+app.get('/api/productos', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM productos');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al cargar productos' });
+  }
 });
 
-// middleware final SIN ruta
+// Ruta para crear un ticket SAT
+app.post('/api/tickets', async (req, res) => {
+  const { cliente, telefono, correo, descripcion } = req.body;
+
+  try {
+    const result = await db.query(
+      'INSERT INTO tickets_sat (cliente, telefono, correo, descripcion) VALUES ($1, $2, $3, $4) RETURNING id',
+      [cliente, telefono, correo, descripcion]
+    );
+    res.status(201).json({ id: result.rows[0].id, message: 'Ticket creado' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al crear ticket' });
+  }
+});
+
 app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Iniciar servidor
 app.listen(PORT, () => {
   console.log(`✅ Servidor API escuchando en http://localhost:${PORT}`);
-  console.log(`📡 Prueba: http://localhost:${PORT}/api/hello`);
 });
