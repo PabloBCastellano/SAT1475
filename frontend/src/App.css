@@ -1,32 +1,214 @@
 /* src/App.css */
-body {
+
+/* Reset y tipografía */
+* {
   margin: 0;
-  font-family: sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa; /* Fondo claro general */
+  color: #212529; /* Texto oscuro */
 }
 
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%); /* Fondo blanco con toque verde claro */
 }
 
-main {
-  flex: 1;
-  padding: 1rem;
-}
-
+/* Estilo del header */
 header {
-  padding: 1rem;
-  background-color: #333;
+  background: linear-gradient(90deg, #228B22 0%, #006400 100%); /* Verde bosque */
   color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+header nav {
+  display: flex;
+  gap: 1.5rem;
 }
 
 header nav a {
   color: white;
-  margin-right: 1rem;
   text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 header nav a:hover {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Contenido principal */
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Estilos generales de secciones */
+section {
+  margin-bottom: 2rem;
+}
+
+h2, h3 {
+  color: #228B22; /* Verde bosque */
+  margin-bottom: 1rem;
+}
+
+/* Estilos de tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #228B22;
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f8e9; /* Verde claro al hacer hover */
+}
+
+/* Botones */
+button {
+  background-color: #228B22; /* Verde */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #006400; /* Verde oscuro */
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Botón de estado rojo (como sandía) */
+button.estado-rojo {
+  background-color: #e53935; /* Rojo intenso */
+}
+
+button.estado-rojo:hover {
+  background-color: #c62828; /* Rojo más oscuro */
+}
+
+/* Formularios */
+form {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 1rem 0;
+}
+
+form div {
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #228B22;
+  box-shadow: 0 0 0 2px rgba(34, 139, 34, 0.2);
+}
+
+/* Página de inicio */
+.home-intro {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #228B22 0%, #006400 100%);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.home-intro h2 {
+  color: white;
+}
+
+/* Estilo para listados (productos, tickets) */
+.lista-elementos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.lista-elementos > div {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.lista-elementos h3 {
+  color: #228B22;
+}
+
+.lista-elementos p {
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.lista-elementos button {
+  margin-top: 0.5rem;
 }

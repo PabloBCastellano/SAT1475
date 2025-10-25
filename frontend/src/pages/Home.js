@@ -3,7 +3,7 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="home-intro">
       <h2>Bienvenido a SAT1475</h2>
       <p>La tienda de microinformática más completa del sector.</p>
       <ul>
