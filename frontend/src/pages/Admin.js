@@ -11,7 +11,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const res = await axios.get('https://sat1475-backend.onrender.com/api/productos');
+        const res = await axios.get('https://sat1475.onrender.com/api/productos');
         setProductos(res.data);
       } catch (err) {
         console.error('Error al cargar productos:', err);
@@ -28,7 +28,7 @@ const Admin = () => {
     const fetchTickets = async () => {
       try {
         // Ajusta esta ruta cuando crees la API de tickets
-        const res = await axios.get('https://sat1475-backend.onrender.com/api/tickets');
+        const res = await axios.get('https://sat1475.onrender.com/api/tickets');
         setTickets(res.data);
       } catch (err) {
         console.error('Error al cargar tickets:', err);
