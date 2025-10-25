@@ -20,7 +20,7 @@ const SAT = () => {
     e.preventDefault();
     try {
       // Ajusta la URL con la de tu backend en Render
-      await axios.post('https://sat1475-backend.onrender.com/api/tickets', ticket);
+      await axios.post('https://sat1475.onrender.com/api/tickets', ticket);
       alert('Ticket enviado correctamente');
       setTicket({
         cliente: '',
