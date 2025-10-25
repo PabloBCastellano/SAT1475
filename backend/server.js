@@ -16,11 +16,23 @@ app.use(cors({
 
 app.use(express.json());
 
-// Ruta de prueba
+// Ruta de prueba: GET /api/hello
 app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Backend conectado ✅' });
+  res.json({ message: '¡API de SAT1475 funcionando!', timestamp: new Date() });
 });
 
+// Ruta de prueba: POST /api/test
+app.post('/api/test', (req, res) => {
+  res.json({ received: req.body, echo: 'OK' });
+});
+
+// middleware final SIN ruta
+app.use((req, res) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
+});
+
+// Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Backend corriendo en puerto ${PORT}`);
+  console.log(`✅ Servidor API escuchando en http://localhost:${PORT}`);
+  console.log(`📡 Prueba: http://localhost:${PORT}/api/hello`);
 });
